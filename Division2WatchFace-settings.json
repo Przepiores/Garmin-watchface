@@ -1,0 +1,204 @@
+{
+  "settings" : [ {
+    "key" : "FieldTopLeft",
+    "valueType" : "number",
+    "defaultValue" : 1,
+    "configTitle" : "FieldTopLeftTitle",
+    "configPrompt" : null,
+    "configType" : "list",
+    "configError" : null,
+    "configHelpUrl" : null,
+    "configReadonly" : false,
+    "configRequired" : false,
+    "configOptions" : [ {
+      "display" : "FieldNone",
+      "value" : 0
+    }, {
+      "display" : "FieldWeather",
+      "value" : 1
+    }, {
+      "display" : "FieldAltitude",
+      "value" : 2
+    }, {
+      "display" : "FieldSteps",
+      "value" : 3
+    }, {
+      "display" : "FieldDate",
+      "value" : 4
+    }, {
+      "display" : "FieldHR",
+      "value" : 5
+    }, {
+      "display" : "FieldCalories",
+      "value" : 6
+    }, {
+      "display" : "FieldDistance",
+      "value" : 7
+    } ],
+    "configMin" : null,
+    "configMax" : null,
+    "configMaxLength" : null
+  }, {
+    "key" : "FieldTopRight",
+    "valueType" : "number",
+    "defaultValue" : 2,
+    "configTitle" : "FieldTopRightTitle",
+    "configPrompt" : null,
+    "configType" : "list",
+    "configError" : null,
+    "configHelpUrl" : null,
+    "configReadonly" : false,
+    "configRequired" : false,
+    "configOptions" : [ {
+      "display" : "FieldNone",
+      "value" : 0
+    }, {
+      "display" : "FieldWeather",
+      "value" : 1
+    }, {
+      "display" : "FieldAltitude",
+      "value" : 2
+    }, {
+      "display" : "FieldSteps",
+      "value" : 3
+    }, {
+      "display" : "FieldDate",
+      "value" : 4
+    }, {
+      "display" : "FieldHR",
+      "value" : 5
+    }, {
+      "display" : "FieldCalories",
+      "value" : 6
+    }, {
+      "display" : "FieldDistance",
+      "value" : 7
+    } ],
+    "configMin" : null,
+    "configMax" : null,
+    "configMaxLength" : null
+  }, {
+    "key" : "FieldBottomLeft",
+    "valueType" : "number",
+    "defaultValue" : 3,
+    "configTitle" : "FieldBottomLeftTitle",
+    "configPrompt" : null,
+    "configType" : "list",
+    "configError" : null,
+    "configHelpUrl" : null,
+    "configReadonly" : false,
+    "configRequired" : false,
+    "configOptions" : [ {
+      "display" : "FieldNone",
+      "value" : 0
+    }, {
+      "display" : "FieldWeather",
+      "value" : 1
+    }, {
+      "display" : "FieldAltitude",
+      "value" : 2
+    }, {
+      "display" : "FieldSteps",
+      "value" : 3
+    }, {
+      "display" : "FieldDate",
+      "value" : 4
+    }, {
+      "display" : "FieldHR",
+      "value" : 5
+    }, {
+      "display" : "FieldCalories",
+      "value" : 6
+    }, {
+      "display" : "FieldDistance",
+      "value" : 7
+    } ],
+    "configMin" : null,
+    "configMax" : null,
+    "configMaxLength" : null
+  }, {
+    "key" : "FieldBottomRight",
+    "valueType" : "number",
+    "defaultValue" : 4,
+    "configTitle" : "FieldBottomRightTitle",
+    "configPrompt" : null,
+    "configType" : "list",
+    "configError" : null,
+    "configHelpUrl" : null,
+    "configReadonly" : false,
+    "configRequired" : false,
+    "configOptions" : [ {
+      "display" : "FieldNone",
+      "value" : 0
+    }, {
+      "display" : "FieldWeather",
+      "value" : 1
+    }, {
+      "display" : "FieldAltitude",
+      "value" : 2
+    }, {
+      "display" : "FieldSteps",
+      "value" : 3
+    }, {
+      "display" : "FieldDate",
+      "value" : 4
+    }, {
+      "display" : "FieldHR",
+      "value" : 5
+    }, {
+      "display" : "FieldCalories",
+      "value" : 6
+    }, {
+      "display" : "FieldDistance",
+      "value" : 7
+    } ],
+    "configMin" : null,
+    "configMax" : null,
+    "configMaxLength" : null
+  } ],
+  "supportsLiveValidation" : false,
+  "languages" : {
+    "pol" : {
+      "FieldDistance" : "Dystans",
+      "FieldAltitude" : "Wysokość",
+      "LabelKcal" : "KCAL",
+      "LabelSteps" : "KROKI",
+      "FieldTopLeftTitle" : "Lewe Górne Pole",
+      "FieldHR" : "Tętno",
+      "FieldSteps" : "Kroki",
+      "LabelAlt" : "WYS",
+      "FieldTopRightTitle" : "Prawe Górne Pole",
+      "FieldBottomLeftTitle" : "Lewe Dolne Pole",
+      "FieldWeather" : "Pogoda",
+      "FieldNone" : "Brak",
+      "FieldCalories" : "Kalorie",
+      "LabelHR" : "TĘTNO",
+      "LabelDist" : "DYST",
+      "AppName" : "Division 2",
+      "LabelNow" : "TERAZ",
+      "FieldBottomRightTitle" : "Prawe Dolne Pole",
+      "FieldDate" : "Data"
+    },
+    "valyrian" : {
+      "FieldDistance" : "Distance",
+      "FieldAltitude" : "Altitude",
+      "LabelKcal" : "KCAL",
+      "LabelSteps" : "STEPS",
+      "FieldTopLeftTitle" : "Top Left Field",
+      "FieldHR" : "Heart Rate",
+      "FieldSteps" : "Steps",
+      "LabelAlt" : "ALT",
+      "FieldTopRightTitle" : "Top Right Field",
+      "FieldBottomLeftTitle" : "Bottom Left Field",
+      "FieldWeather" : "Weather",
+      "FieldNone" : "None",
+      "FieldCalories" : "Calories",
+      "LabelHR" : "HR",
+      "LabelDist" : "DIST",
+      "AppName" : "GameFace 4in1",
+      "LabelNow" : "NOW",
+      "FieldBottomRightTitle" : "Bottom Right Field",
+      "FieldDate" : "Date"
+    }
+  }
+}

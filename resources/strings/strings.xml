@@ -1,0 +1,22 @@
+<strings>
+    <string id="AppName">GameFace 4in1</string>
+    <string id="FieldTopLeftTitle">Top Left Field</string>
+    <string id="FieldTopRightTitle">Top Right Field</string>
+    <string id="FieldBottomLeftTitle">Bottom Left Field</string>
+    <string id="FieldBottomRightTitle">Bottom Right Field</string>
+    <string id="FieldNone">None</string>
+    <string id="FieldWeather">Weather</string>
+    <string id="FieldAltitude">Altitude</string>
+    <string id="FieldSteps">Steps</string>
+    <string id="FieldDate">Date</string>
+    <string id="FieldHR">Heart Rate</string>
+    <string id="FieldCalories">Calories</string>
+    <string id="FieldDistance">Distance</string>
+
+    <string id="LabelNow">NOW</string>
+    <string id="LabelAlt">ALT</string>
+    <string id="LabelSteps">STEPS</string>
+    <string id="LabelHR">HR</string>
+    <string id="LabelKcal">KCAL</string>
+    <string id="LabelDist">DIST</string>
+</strings>

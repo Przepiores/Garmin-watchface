@@ -1,0 +1,22 @@
+<strings>
+    <string id="AppName">Division 2</string>
+    <string id="FieldTopLeftTitle">Lewe Górne Pole</string>
+    <string id="FieldTopRightTitle">Prawe Górne Pole</string>
+    <string id="FieldBottomLeftTitle">Lewe Dolne Pole</string>
+    <string id="FieldBottomRightTitle">Prawe Dolne Pole</string>
+    <string id="FieldNone">Brak</string>
+    <string id="FieldWeather">Pogoda</string>
+    <string id="FieldAltitude">Wysokość</string>
+    <string id="FieldSteps">Kroki</string>
+    <string id="FieldDate">Data</string>
+    <string id="FieldHR">Tętno</string>
+    <string id="FieldCalories">Kalorie</string>
+    <string id="FieldDistance">Dystans</string>
+
+    <string id="LabelNow">TERAZ</string>
+    <string id="LabelAlt">WYS</string>
+    <string id="LabelSteps">KROKI</string>
+    <string id="LabelHR">TĘTNO</string>
+    <string id="LabelKcal">KCAL</string>
+    <string id="LabelDist">DYST</string>
+</strings>

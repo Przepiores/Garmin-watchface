@@ -1,0 +1,6 @@
+<properties>
+    <property id="FieldTopLeft" type="number">1</property>
+    <property id="FieldTopRight" type="number">2</property>
+    <property id="FieldBottomLeft" type="number">3</property>
+    <property id="FieldBottomRight" type="number">4</property>
+</properties>

@@ -1,0 +1,12 @@
+# Connect IQ build artifacts
+bin/
+gen/
+mir/
+internal-mir/
+external-mir/
+*.prg
+*.prg.debug.xml
+*.iq
+
+# Misc
+Nowy folder/

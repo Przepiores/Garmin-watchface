@@ -1,0 +1,50 @@
+<settings>
+    <setting propertyKey="@Properties.FieldTopLeft" title="@Strings.FieldTopLeftTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.FieldNone</listEntry>
+            <listEntry value="1">@Strings.FieldWeather</listEntry>
+            <listEntry value="2">@Strings.FieldAltitude</listEntry>
+            <listEntry value="3">@Strings.FieldSteps</listEntry>
+            <listEntry value="4">@Strings.FieldDate</listEntry>
+            <listEntry value="5">@Strings.FieldHR</listEntry>
+            <listEntry value="6">@Strings.FieldCalories</listEntry>
+            <listEntry value="7">@Strings.FieldDistance</listEntry>
+        </settingConfig>
+    </setting>
+    <setting propertyKey="@Properties.FieldTopRight" title="@Strings.FieldTopRightTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.FieldNone</listEntry>
+            <listEntry value="1">@Strings.FieldWeather</listEntry>
+            <listEntry value="2">@Strings.FieldAltitude</listEntry>
+            <listEntry value="3">@Strings.FieldSteps</listEntry>
+            <listEntry value="4">@Strings.FieldDate</listEntry>
+            <listEntry value="5">@Strings.FieldHR</listEntry>
+            <listEntry value="6">@Strings.FieldCalories</listEntry>
+            <listEntry value="7">@Strings.FieldDistance</listEntry>
+        </settingConfig>
+    </setting>
+    <setting propertyKey="@Properties.FieldBottomLeft" title="@Strings.FieldBottomLeftTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.FieldNone</listEntry>
+            <listEntry value="1">@Strings.FieldWeather</listEntry>
+            <listEntry value="2">@Strings.FieldAltitude</listEntry>
+            <listEntry value="3">@Strings.FieldSteps</listEntry>
+            <listEntry value="4">@Strings.FieldDate</listEntry>
+            <listEntry value="5">@Strings.FieldHR</listEntry>
+            <listEntry value="6">@Strings.FieldCalories</listEntry>
+            <listEntry value="7">@Strings.FieldDistance</listEntry>
+        </settingConfig>
+    </setting>
+    <setting propertyKey="@Properties.FieldBottomRight" title="@Strings.FieldBottomRightTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.FieldNone</listEntry>
+            <listEntry value="1">@Strings.FieldWeather</listEntry>
+            <listEntry value="2">@Strings.FieldAltitude</listEntry>
+            <listEntry value="3">@Strings.FieldSteps</listEntry>
+            <listEntry value="4">@Strings.FieldDate</listEntry>
+            <listEntry value="5">@Strings.FieldHR</listEntry>
+            <listEntry value="6">@Strings.FieldCalories</listEntry>
+            <listEntry value="7">@Strings.FieldDistance</listEntry>
+        </settingConfig>
+    </setting>
+</settings>
