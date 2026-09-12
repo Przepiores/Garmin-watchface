@@ -1,6 +1,7 @@
 import Toybox.Graphics;
 import Toybox.WatchUi;
 import Toybox.Math;
+import Toybox.ActivityMonitor;
 
 //! Division 2 SHD Theme — active 12:00–17:00 (Day)
 //! Orange tactical HUD with honeycomb background and SHD logo.
@@ -16,6 +17,8 @@ class DivisionTheme extends ThemeBase {
     private const COLOR_SHD_SEMI      = 0xBB5500;
 
     private var _shdLogo as Graphics.BitmapType or Null = null;
+    private var _timeFont as Graphics.VectorFont or Null = null;
+    private var _smallFont as Graphics.VectorFont or Null = null;
 
     public function initialize() {
         ThemeBase.initialize();
@@ -25,6 +28,35 @@ class DivisionTheme extends ThemeBase {
         _colorDim       = COLOR_SHD_RUST;
         _colorAlert     = 0xFF1E27;
         _colorTime      = COLOR_SHD_SEMI;
+        _radialFontScale = 1.2;
+    }
+
+    public function init(dc as Graphics.Dc) as Void {
+        ThemeBase.init(dc);
+        if (Graphics has :getVectorFont) {
+            try {
+                var h = dc.getFontHeight(Graphics.FONT_NUMBER_HOT);
+                _timeFont = Graphics.getVectorFont({
+                    :face => ["RobotoCondensedBold", "Swiss721Regular", "RobotoRegular"],
+                    :size => (h * 1.1).toNumber()
+                });
+            } catch (e) { _timeFont = null; }
+            try {
+                var h2 = dc.getFontHeight(Graphics.FONT_XTINY);
+                _smallFont = Graphics.getVectorFont({
+                    :face => ["RobotoCondensedBold", "Swiss721Regular", "RobotoRegular"],
+                    :size => (h2 * 1.1).toNumber()
+                });
+            } catch (e) { _smallFont = null; }
+        }
+    }
+
+    protected function getTimeFont() {
+        return (_timeFont != null) ? _timeFont : Graphics.FONT_NUMBER_HOT;
+    }
+
+    protected function getSmallFont() {
+        return (_smallFont != null) ? _smallFont : Graphics.FONT_XTINY;
     }
 
     public function loadResources() as Void {
@@ -37,6 +69,60 @@ class DivisionTheme extends ThemeBase {
     public function unloadResources() as Void {
         ThemeBase.unloadResources();
         _shdLogo = null;
+    }
+
+    // ================================================================
+    //  STEP GOAL PROGRESS ARC — accent-colored on completion
+    // ================================================================
+
+    public function drawProgressArc(dc as Graphics.Dc) as Void {
+        var monInfo = ActivityMonitor.getInfo();
+        var steps = 0;
+        var stepGoal = 10000;
+
+        if (monInfo != null) {
+            if (monInfo.steps != null) { steps = monInfo.steps; }
+            if (monInfo.stepGoal != null) { stepGoal = monInfo.stepGoal; }
+        }
+        if (stepGoal == 0) { stepGoal = 10000; }
+
+        var progress = steps.toFloat() / stepGoal.toFloat();
+        if (progress > 1.0) { progress = 1.0; }
+
+        var arcRadius = 201.0 * _scale;
+        var startAngle = 210;
+        var totalArcDeg = 120;
+
+        // Container arc
+        dc.setColor(_colorPrimary, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(2);
+        dc.drawArc(_centerX, _centerY, arcRadius,
+            Graphics.ARC_COUNTER_CLOCKWISE, startAngle, startAngle + totalArcDeg);
+
+        // End ticks
+        var r1 = arcRadius - 5 * _scale;
+        var r2 = arcRadius + 5 * _scale;
+
+        var radStart = startAngle * Math.PI / 180.0;
+        dc.drawLine(_centerX + r1 * Math.cos(radStart), _centerY - r1 * Math.sin(radStart),
+                    _centerX + r2 * Math.cos(radStart), _centerY - r2 * Math.sin(radStart));
+
+        var radEnd = (startAngle + totalArcDeg) * Math.PI / 180.0;
+        dc.drawLine(_centerX + r1 * Math.cos(radEnd), _centerY - r1 * Math.sin(radEnd),
+                    _centerX + r2 * Math.cos(radEnd), _centerY - r2 * Math.sin(radEnd));
+
+        // Progress fill
+        var progressDeg = (totalArcDeg * progress).toNumber();
+        if (progressDeg > 0) {
+            if (progress >= 1.0) {
+                dc.setColor(_colorAccent, Graphics.COLOR_TRANSPARENT);
+            } else {
+                dc.setColor(_colorPrimary, Graphics.COLOR_TRANSPARENT);
+            }
+            dc.setPenWidth(6);
+            dc.drawArc(_centerX, _centerY, arcRadius,
+                Graphics.ARC_COUNTER_CLOCKWISE, startAngle, startAngle + progressDeg);
+        }
     }
 
     // ================================================================

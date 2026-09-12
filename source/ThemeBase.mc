@@ -23,6 +23,7 @@ class ThemeBase {
 
     // Radial font (shared, CIQ 4.2.1+)
     protected var _radialFont as Graphics.VectorFont or Null = null;
+    protected var _radialFontScale as Float = 1.0;
 
     // ── Palette (override in subclass constructor) ──────────────────
     protected var _colorPrimary   as Number = 0xFFFFFF;
@@ -60,7 +61,7 @@ class ThemeBase {
             try {
                 _radialFont = Graphics.getVectorFont({
                     :face => ["RobotoCondensedBold", "Swiss721Regular", "RobotoRegular"],
-                    :size => (24 * _scale).toNumber()
+                    :size => (24 * _scale * _radialFontScale).toNumber()
                 });
             } catch (e) {
                 _radialFont = null;
@@ -127,12 +128,22 @@ class ThemeBase {
 
     public function drawCenterElement(dc as Graphics.Dc) as Void {}
 
+    //! Font used by drawTime(). Override to substitute a differently-sized vector font.
+    protected function getTimeFont() {
+        return Graphics.FONT_NUMBER_HOT;
+    }
+
+    //! Font used for the small accessory text (date/battery). Override for a differently-sized vector font.
+    protected function getSmallFont() {
+        return Graphics.FONT_XTINY;
+    }
+
     public function drawTime(dc as Graphics.Dc) as Void {
         var time = System.getClockTime();
         var timeStr = Lang.format("$1$:$2$",
             [time.hour.format("%02d"), time.min.format("%02d")]);
         dc.setColor(_colorTime, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(_centerX, (275 * _scale).toNumber(), Graphics.FONT_NUMBER_HOT, timeStr,
+        dc.drawText(_centerX, (275 * _scale).toNumber(), getTimeFont(), timeStr,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
@@ -181,7 +192,7 @@ class ThemeBase {
         var info = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
         var dayLabelStr = Lang.format("$1$ $2$", [info.day_of_week.toUpper(), info.day.format("%d")]);
         dc.setColor(_colorPrimary, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(_centerX, dateY.toNumber(), Graphics.FONT_XTINY, dayLabelStr,
+        dc.drawText(_centerX, dateY.toNumber(), getSmallFont(), dayLabelStr,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
         // Battery
@@ -192,7 +203,7 @@ class ThemeBase {
         }
         var batStr = batPct.toString() + "%";
 
-        var textWidth = dc.getTextWidthInPixels(batStr, Graphics.FONT_XTINY);
+        var textWidth = dc.getTextWidthInPixels(batStr, getSmallFont());
         var iconW = 26 * _scale;
         var iconH = 12 * _scale;
         var gap   = 6 * _scale;
@@ -203,7 +214,7 @@ class ThemeBase {
         var startX = _centerX - (totalWidth / 2.0).toNumber();
 
         dc.setColor(_colorPrimary, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(startX, batY.toNumber(), Graphics.FONT_XTINY, batStr,
+        dc.drawText(startX, batY.toNumber(), getSmallFont(), batStr,
             Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
 
         var iconX = startX + textWidth + gap;
