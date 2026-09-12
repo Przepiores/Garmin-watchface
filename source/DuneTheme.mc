@@ -5,7 +5,7 @@ import Toybox.Lang;
 
 class DuneTheme extends ThemeBase {
     
-    function initialize() {
+    public function initialize() {
         ThemeBase.initialize();
         
         // Color Palette
@@ -17,7 +17,7 @@ class DuneTheme extends ThemeBase {
         _colorTime = 0xD4A050; // Spice gold semi
     }
 
-    function drawBackground(dc) {
+    public function drawBackground(dc as Graphics.Dc) as Void {
         dc.setColor(_colorDim, Graphics.COLOR_TRANSPARENT);
         dc.setPenWidth(2);
         
@@ -43,7 +43,7 @@ class DuneTheme extends ThemeBase {
         }
     }
 
-    function drawOuterRing(dc) {
+    public function drawOuterRing(dc as Graphics.Dc) as Void {
         dc.setPenWidth(4);
         dc.setColor(_colorPrimary, Graphics.COLOR_TRANSPARENT);
         
@@ -90,7 +90,7 @@ class DuneTheme extends ThemeBase {
         }
     }
 
-    function drawCenterElement(dc) {
+    public function drawCenterElement(dc as Graphics.Dc) as Void {
         // Arrakis Sun
         var sunY = (65 * _scale).toNumber();
         dc.setColor(_colorPrimary, Graphics.COLOR_TRANSPARENT);
@@ -128,7 +128,7 @@ class DuneTheme extends ThemeBase {
         dc.drawLine(_centerX + wingOut, _centerY + wingSpread, _centerX + wingIn, _centerY);
     }
     
-    function drawAOD(dc) {
+    public function drawAOD(dc as Graphics.Dc) as Void {
         // Pixel-shifting for burn-in protection
         var clockTime = System.getClockTime();
         var shiftX = (clockTime.min % 3) - 1;

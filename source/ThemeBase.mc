@@ -32,11 +32,21 @@ class ThemeBase {
     protected var _colorAlert     as Number = 0xFF0000;
     protected var _colorTime      as Number = 0xFFFFFF;
 
+    // ── Data-field type identifiers (see getFieldDataStr()) ──────────
+    public const FIELD_OFF      = 0;
+    public const FIELD_WEATHER  = 1;
+    public const FIELD_ALTITUDE = 2;
+    public const FIELD_STEPS    = 3;
+    public const FIELD_DATE     = 4;
+    public const FIELD_HR       = 5;
+    public const FIELD_KCAL     = 6;
+    public const FIELD_DIST     = 7;
+
     // ── Cached data-field settings (see refreshFieldTypes()) ─────────
-    protected var _fieldTopLeft     as Number = 1;
-    protected var _fieldTopRight    as Number = 2;
-    protected var _fieldBottomLeft  as Number = 3;
-    protected var _fieldBottomRight as Number = 4;
+    protected var _fieldTopLeft     as Number = FIELD_WEATHER;
+    protected var _fieldTopRight    as Number = FIELD_ALTITUDE;
+    protected var _fieldBottomLeft  as Number = FIELD_STEPS;
+    protected var _fieldBottomRight as Number = FIELD_DATE;
 
     //! Called once with dc dimensions
     public function init(dc as Graphics.Dc) as Void {
@@ -63,10 +73,10 @@ class ThemeBase {
     //! Re-read Field* properties. Called once from init() and again whenever
     //! Application.onSettingsChanged() fires (see Division2WatchFaceView.onSettingsChanged()).
     public function refreshFieldTypes() as Void {
-        _fieldTopLeft     = getProp("FieldTopLeft", 1);
-        _fieldTopRight    = getProp("FieldTopRight", 2);
-        _fieldBottomLeft  = getProp("FieldBottomLeft", 3);
-        _fieldBottomRight = getProp("FieldBottomRight", 4);
+        _fieldTopLeft     = getProp("FieldTopLeft", FIELD_WEATHER);
+        _fieldTopRight    = getProp("FieldTopRight", FIELD_ALTITUDE);
+        _fieldBottomLeft  = getProp("FieldBottomLeft", FIELD_STEPS);
+        _fieldBottomRight = getProp("FieldBottomRight", FIELD_DATE);
     }
 
     // ── Static-layer offscreen buffer (background + outer ring) ─────
@@ -136,28 +146,28 @@ class ThemeBase {
 
         // Top-Left at 140°
         var tlData = getFieldDataStr(tlType);
-        if (tlType != 0 && tlData[1].length() > 0) {
+        if (tlType != FIELD_OFF && tlData[1].length() > 0) {
             var str = tlData[0].length() > 0 ? tlData[0] + " " + tlData[1] : tlData[1];
             drawTextAlongArc(dc, str, arcRadius, 140.0, -1, _colorPrimary, Graphics.FONT_XTINY);
         }
 
         // Top-Right at 40°
         var trData = getFieldDataStr(trType);
-        if (trType != 0 && trData[1].length() > 0) {
+        if (trType != FIELD_OFF && trData[1].length() > 0) {
             var str = trData[0].length() > 0 ? trData[0] + " " + trData[1] : trData[1];
             drawTextAlongArc(dc, str, arcRadius, 40.0, -1, _colorPrimary, Graphics.FONT_XTINY);
         }
 
         // Bottom-Left at 240°
         var blData = getFieldDataStr(blType);
-        if (blType != 0 && blData[1].length() > 0) {
+        if (blType != FIELD_OFF && blData[1].length() > 0) {
             var str = blData[0].length() > 0 ? blData[0] + " " + blData[1] : blData[1];
             drawTextAlongArc(dc, str, arcRadius, 240.0, 1, _colorPrimary, Graphics.FONT_XTINY);
         }
 
         // Bottom-Right at 300°
         var brData = getFieldDataStr(brType);
-        if (brType != 0 && brData[1].length() > 0) {
+        if (brType != FIELD_OFF && brData[1].length() > 0) {
             var str = brData[0].length() > 0 ? brData[0] + " " + brData[1] : brData[1];
             drawTextAlongArc(dc, str, arcRadius, 300.0, 1, _colorPrimary, Graphics.FONT_XTINY);
         }
@@ -309,7 +319,7 @@ class ThemeBase {
     }
 
     protected function getFieldDataStr(fieldType as Number) as Array {
-        if (fieldType == 1) {
+        if (fieldType == FIELD_WEATHER) {
             var valStr = "--\u00B0";
             try {
                 if (Weather has :getCurrentConditions) {
@@ -320,7 +330,7 @@ class ThemeBase {
                 }
             } catch (e) {}
             return [WatchUi.loadResource(Rez.Strings.LabelNow) as String, valStr];
-        } else if (fieldType == 2) {
+        } else if (fieldType == FIELD_ALTITUDE) {
             var valStr = "--";
             try {
                 var actInfo = Activity.getActivityInfo();
@@ -329,18 +339,18 @@ class ThemeBase {
                 }
             } catch (e) {}
             return [WatchUi.loadResource(Rez.Strings.LabelAlt) as String, valStr];
-        } else if (fieldType == 3) {
+        } else if (fieldType == FIELD_STEPS) {
             var valStr = "0";
             var monInfo = ActivityMonitor.getInfo();
             if (monInfo != null && monInfo.steps != null) {
                 valStr = monInfo.steps.toString();
             }
             return [WatchUi.loadResource(Rez.Strings.LabelSteps) as String, valStr];
-        } else if (fieldType == 4) {
+        } else if (fieldType == FIELD_DATE) {
             var info = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
             var valStr = Lang.format("$1$ $2$", [info.day.format("%d"), info.month.toUpper()]);
             return ["", valStr];
-        } else if (fieldType == 5) {
+        } else if (fieldType == FIELD_HR) {
             var valStr = "--";
             var actInfo = Activity.getActivityInfo();
             if (actInfo != null && actInfo.currentHeartRate != null) {
@@ -355,14 +365,14 @@ class ThemeBase {
                 }
             }
             return [WatchUi.loadResource(Rez.Strings.LabelHR) as String, valStr];
-        } else if (fieldType == 6) {
+        } else if (fieldType == FIELD_KCAL) {
             var valStr = "0";
             var monInfo = ActivityMonitor.getInfo();
             if (monInfo != null && monInfo.calories != null) {
                 valStr = monInfo.calories.toString();
             }
             return [WatchUi.loadResource(Rez.Strings.LabelKcal) as String, valStr];
-        } else if (fieldType == 7) {
+        } else if (fieldType == FIELD_DIST) {
             var valStr = "0.0";
             var monInfo = ActivityMonitor.getInfo();
             if (monInfo != null && monInfo.distance != null) {

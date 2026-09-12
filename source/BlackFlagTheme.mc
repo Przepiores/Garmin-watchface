@@ -5,7 +5,7 @@ import Toybox.Lang;
 
 class BlackFlagTheme extends ThemeBase {
 
-    function initialize() {
+    public function initialize() {
         ThemeBase.initialize();
         _colorPrimary = 0xD4AF37;   // Jackdaw brass
         _colorSecondary = 0xF4EBD9; // Aged parchment
@@ -15,7 +15,7 @@ class BlackFlagTheme extends ThemeBase {
         _colorTime = 0xF4EBD9;      // Parchment
     }
 
-    function drawBackground(dc) {
+    public function drawBackground(dc as Graphics.Dc) as Void {
         dc.setColor(0x1A2F2A, Graphics.COLOR_TRANSPARENT); // Dark patina
         dc.setPenWidth(1);
 
@@ -32,7 +32,7 @@ class BlackFlagTheme extends ThemeBase {
         }
     }
 
-    function drawOuterRing(dc) {
+    public function drawOuterRing(dc as Graphics.Dc) as Void {
         var ringRadius = (_screenWidth / 2.0) - 10 * _scale;
 
         // Complete circle ring
@@ -96,7 +96,7 @@ class BlackFlagTheme extends ThemeBase {
         dc.drawText((_centerX - textRadius).toNumber(), _centerY, Graphics.FONT_TINY, "W", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
-    function drawCenterElement(dc) {
+    public function drawCenterElement(dc as Graphics.Dc) as Void {
         var cy = _centerY - 40 * _scale;
         var rMain = 60 * _scale;
         var rSec = 40 * _scale;
@@ -147,7 +147,7 @@ class BlackFlagTheme extends ThemeBase {
         dc.drawLine((_centerX + acWidth/2).toNumber(), acBotY.toNumber(), _centerX, (acBotY - 15 * _scale).toNumber());
     }
 
-    function drawAOD(dc) {
+    public function drawAOD(dc as Graphics.Dc) as Void {
         var clockTime = System.getClockTime();
         var min = clockTime.min;
         var hour = clockTime.hour;

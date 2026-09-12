@@ -6,7 +6,7 @@ import Toybox.ActivityMonitor;
 
 class WarhammerTheme extends ThemeBase {
 
-    function initialize() {
+    public function initialize() {
         ThemeBase.initialize();
         
         // Carcharodons (Space Sharks) Night Theme Palette
@@ -18,11 +18,7 @@ class WarhammerTheme extends ThemeBase {
         _colorTime = 0xEAEAEA;      // Chalk white
     }
 
-    function drawBackground(dc) {
-        // Clear background to pitch black void
-        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
-        dc.clear();
-        
+    public function drawBackground(dc as Graphics.Dc) as Void {
         // Niho Taniwha (Shark Tooth) tribal pattern
         dc.setColor(_colorDim, Graphics.COLOR_TRANSPARENT);
         var r1 = 160 * _scale;
@@ -55,7 +51,7 @@ class WarhammerTheme extends ThemeBase {
         }
     }
 
-    function drawOuterRing(dc) {
+    public function drawOuterRing(dc as Graphics.Dc) as Void {
         var r = 220 * _scale;
         
         // Outer mechanicus cog-wheel
@@ -111,7 +107,7 @@ class WarhammerTheme extends ThemeBase {
         }
     }
 
-    function drawCenterElement(dc) {
+    public function drawCenterElement(dc as Graphics.Dc) as Void {
         var cy = _centerY - 30 * _scale;
         
         // Carcharodons Shark Jaw
@@ -177,7 +173,7 @@ class WarhammerTheme extends ThemeBase {
         dc.drawLine(_centerX + 60*_scale, _centerY - 30*_scale, _centerX + 85*_scale, _centerY - 40*_scale);
     }
 
-    function drawProgressArc(dc) {
+    public function drawProgressArc(dc as Graphics.Dc) as Void {
         var info = ActivityMonitor.getInfo();
         var steps = 0;
         var goal = 1;
@@ -211,10 +207,7 @@ class WarhammerTheme extends ThemeBase {
         }
     }
 
-    function drawAOD(dc) {
-        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
-        dc.clear();
-        
+    public function drawAOD(dc as Graphics.Dc) as Void {
         var clockTime = System.getClockTime();
         // Pixel shifting logic (varies by minute)
         var shiftX = (clockTime.min % 5) - 2;

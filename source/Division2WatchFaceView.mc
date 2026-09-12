@@ -12,6 +12,12 @@ class Division2WatchFaceView extends WatchUi.WatchFace {
     private var _currentThemeIdx as Number = -1;
     private var _isAwake as Boolean = true;
 
+    // ── Theme indices — must match _themes array order (see onLayout()) ──
+    private const THEME_DUNE       = 0;
+    private const THEME_DIVISION   = 1;
+    private const THEME_BLACKFLAG  = 2;
+    private const THEME_WARHAMMER  = 3;
+
     public function initialize() {
         WatchFace.initialize();
     }
@@ -33,12 +39,12 @@ class Division2WatchFaceView extends WatchUi.WatchFace {
     }
 
     //! Determine which theme to use based on current hour
-    //! 0=Dune(8-12), 1=Division(12-17), 2=BlackFlag(17-22), 3=Warhammer(22-8)
+    //! THEME_DUNE(8-12), THEME_DIVISION(12-17), THEME_BLACKFLAG(17-22), THEME_WARHAMMER(22-8)
     private function getThemeIndex(hour as Number) as Number {
-        if (hour >= 8  && hour < 12) { return 0; }  // Dune — morning
-        if (hour >= 12 && hour < 17) { return 1; }  // Division 2 — day
-        if (hour >= 17 && hour < 22) { return 2; }  // Black Flag — evening
-        return 3;                                     // Warhammer — night
+        if (hour >= 8  && hour < 12) { return THEME_DUNE; }       // morning
+        if (hour >= 12 && hour < 17) { return THEME_DIVISION; }   // day
+        if (hour >= 17 && hour < 22) { return THEME_BLACKFLAG; }  // evening
+        return THEME_WARHAMMER;                                   // night
     }
 
     public function onUpdate(dc as Graphics.Dc) as Void {
