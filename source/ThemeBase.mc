@@ -32,6 +32,12 @@ class ThemeBase {
     protected var _colorAlert     as Number = 0xFF0000;
     protected var _colorTime      as Number = 0xFFFFFF;
 
+    // ── Cached data-field settings (see refreshFieldTypes()) ─────────
+    protected var _fieldTopLeft     as Number = 1;
+    protected var _fieldTopRight    as Number = 2;
+    protected var _fieldBottomLeft  as Number = 3;
+    protected var _fieldBottomRight as Number = 4;
+
     //! Called once with dc dimensions
     public function init(dc as Graphics.Dc) as Void {
         _screenWidth  = dc.getWidth();
@@ -50,6 +56,17 @@ class ThemeBase {
                 _radialFont = null;
             }
         }
+
+        refreshFieldTypes();
+    }
+
+    //! Re-read Field* properties. Called once from init() and again whenever
+    //! Application.onSettingsChanged() fires (see Division2WatchFaceView.onSettingsChanged()).
+    public function refreshFieldTypes() as Void {
+        _fieldTopLeft     = getProp("FieldTopLeft", 1);
+        _fieldTopRight    = getProp("FieldTopRight", 2);
+        _fieldBottomLeft  = getProp("FieldBottomLeft", 3);
+        _fieldBottomRight = getProp("FieldBottomRight", 4);
     }
 
     //! Load heavy resources (bitmaps). Called when theme becomes active.
@@ -78,10 +95,10 @@ class ThemeBase {
     public function drawDataFields(dc as Graphics.Dc) as Void {
         var arcRadius = 181.0 * _scale;
 
-        var tlType = getProp("FieldTopLeft", 1);
-        var trType = getProp("FieldTopRight", 2);
-        var blType = getProp("FieldBottomLeft", 3);
-        var brType = getProp("FieldBottomRight", 4);
+        var tlType = _fieldTopLeft;
+        var trType = _fieldTopRight;
+        var blType = _fieldBottomLeft;
+        var brType = _fieldBottomRight;
 
         // Top-Left at 140°
         var tlData = getFieldDataStr(tlType);

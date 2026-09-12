@@ -5,6 +5,8 @@ import Toybox.WatchUi;
 //! Main application entry point for the Division 2 Watch Face
 class Division2WatchFaceApp extends Application.AppBase {
 
+    private var _view as Division2WatchFaceView or Null = null;
+
     //! Constructor
     function initialize() {
         AppBase.initialize();
@@ -23,11 +25,15 @@ class Division2WatchFaceApp extends Application.AppBase {
     //! Return the initial view and delegate for the watch face
     //! @return Array containing the initial view
     function getInitialView() as [WatchUi.Views] or [WatchUi.Views, WatchUi.InputDelegates] {
-        return [new Division2WatchFaceView()] as [WatchUi.Views];
+        _view = new Division2WatchFaceView();
+        return [_view] as [WatchUi.Views];
     }
 
     //! Called when application settings are changed in Garmin Connect Mobile
     function onSettingsChanged() as Void {
+        if (_view != null) {
+            _view.onSettingsChanged();
+        }
         WatchUi.requestUpdate();
     }
 

@@ -88,4 +88,12 @@ class Division2WatchFaceView extends WatchUi.WatchFace {
         _isAwake = true;
         WatchUi.requestUpdate();
     }
+
+    public function onSettingsChanged() as Void {
+        if (_themes != null) {
+            for (var i = 0; i < _themes.size(); i++) {
+                (_themes[i] as ThemeBase).refreshFieldTypes();
+            }
+        }
+    }
 }
