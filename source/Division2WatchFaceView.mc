@@ -67,8 +67,7 @@ class Division2WatchFaceView extends WatchUi.WatchFace {
         var theme = _themes[idx] as ThemeBase;
 
         if (_isAwake) {
-            theme.drawBackground(dc);
-            theme.drawOuterRing(dc);
+            theme.drawStaticLayer(dc);
             theme.drawProgressArc(dc);
             theme.drawCenterElement(dc);
             theme.drawDataFields(dc);

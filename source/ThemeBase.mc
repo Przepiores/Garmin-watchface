@@ -69,11 +69,45 @@ class ThemeBase {
         _fieldBottomRight = getProp("FieldBottomRight", 4);
     }
 
+    // ── Static-layer offscreen buffer (background + outer ring) ─────
+    protected var _bgBuffer as Graphics.BufferedBitmap or Null = null;
+
     //! Load heavy resources (bitmaps). Called when theme becomes active.
-    public function loadResources() as Void {}
+    public function loadResources() as Void {
+        if (_bgBuffer == null) {
+            var ref = Graphics.createBufferedBitmap({
+                :width  => _screenWidth,
+                :height => _screenHeight
+            });
+            _bgBuffer = ref.get() as Graphics.BufferedBitmap or Null;
+        }
+        renderStaticBuffer();
+    }
 
     //! Unload heavy resources. Called when theme becomes inactive.
-    public function unloadResources() as Void {}
+    public function unloadResources() as Void {
+        _bgBuffer = null;
+    }
+
+    //! (Re)draw the static background + outer ring once into the offscreen buffer.
+    protected function renderStaticBuffer() as Void {
+        if (_bgBuffer == null) { return; }
+        var bufDc = _bgBuffer.getDc();
+        bufDc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
+        bufDc.clear();
+        drawBackground(bufDc);
+        drawOuterRing(bufDc);
+    }
+
+    //! Draw the cached static layer, or fall back to direct drawing if buffering failed/unavailable.
+    public function drawStaticLayer(dc as Graphics.Dc) as Void {
+        if (_bgBuffer != null) {
+            dc.drawBitmap(0, 0, _bgBuffer);
+        } else {
+            drawBackground(dc);
+            drawOuterRing(dc);
+        }
+    }
 
     // ── Main drawing pipeline (override each in subclass) ──────────
 

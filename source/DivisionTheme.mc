@@ -28,12 +28,14 @@ class DivisionTheme extends ThemeBase {
     }
 
     public function loadResources() as Void {
+        ThemeBase.loadResources();
         if (_shdLogo == null) {
             _shdLogo = WatchUi.loadResource(Rez.Drawables.ShdLogo) as Graphics.BitmapType;
         }
     }
 
     public function unloadResources() as Void {
+        ThemeBase.unloadResources();
         _shdLogo = null;
     }
 
