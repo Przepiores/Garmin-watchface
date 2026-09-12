@@ -11,6 +11,7 @@ class DivisionTheme extends ThemeBase {
     private const COLOR_SHD_AMBER     = 0xCC4400;
     private const COLOR_SHD_RUST      = 0x882200;
     private const COLOR_SHD_HEX_MID   = 0x331000;
+    private const COLOR_SHD_HEX_OUTER = 0x1A0800;
     private const COLOR_SHD_DIM       = 0x220800;
     private const COLOR_SHD_SEMI      = 0xBB5500;
 
