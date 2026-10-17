@@ -1,0 +1,5 @@
+<resources>
+    <fonts>
+        <font id="DawnTime" filename="dawn_time.fnt" filter="0123456789:" antialias="true"/>
+    </fonts>
+</resources>
