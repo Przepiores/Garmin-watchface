@@ -2,22 +2,16 @@ import Toybox.Graphics;
 import Toybox.WatchUi;
 import Toybox.System;
 import Toybox.Lang;
+import Toybox.Time;
 
 //! Main watch face view — theme dispatcher.
-//! Selects the active theme based on current hour and delegates all drawing.
+//! Selects one theme per local calendar day (the themes take turns in _themes order) and delegates all drawing.
 class Division2WatchFaceView extends WatchUi.WatchFace {
 
     // Theme instances
     private var _themes as Array or Null = null;
     private var _currentThemeIdx as Number = -1;
     private var _isAwake as Boolean = true;
-
-    // ── Theme indices — must match _themes array order (see onLayout()) ──
-    private const THEME_WITCHER      = 0;
-    private const THEME_DIVISION     = 1;
-    private const THEME_DAWNWALKER   = 2;
-    private const THEME_RESIDENTEVIL = 3;
-    private const THEME_WARHAMMER    = 4;
 
     public function initialize() {
         WatchFace.initialize();
@@ -41,18 +35,15 @@ class Division2WatchFaceView extends WatchUi.WatchFace {
         residentEvil.init(dc);
         warhammer.init(dc);
 
+        // Order = rotation order: one theme per day (see getThemeIndex())
         _themes = [witcher, division, dawnwalker, residentEvil, warhammer];
     }
 
-    //! Determine which theme to use based on current hour
-    //! THEME_WITCHER(8-12), THEME_DIVISION(12-17), THEME_DAWNWALKER(17-19),
-    //! THEME_RESIDENTEVIL(19-22), THEME_WARHAMMER(22-8)
-    private function getThemeIndex(hour as Number) as Number {
-        if (hour >= 8  && hour < 12) { return THEME_WITCHER; }       // morning
-        if (hour >= 12 && hour < 17) { return THEME_DIVISION; }      // day
-        if (hour >= 17 && hour < 19) { return THEME_DAWNWALKER; }    // dusk
-        if (hour >= 19 && hour < 22) { return THEME_RESIDENTEVIL; }  // evening
-        return THEME_WARHAMMER;                                      // night
+    //! One theme per local calendar day: day number since 1970 (local time, DST included) modulo the theme count,
+    //! so the themes take turns in _themes order and the switch happens at midnight.
+    private function getThemeIndex(count as Number) as Number {
+        var localSeconds = Time.now().value() + System.getClockTime().timeZoneOffset;
+        return (localSeconds / 86400) % count;
     }
 
     public function onUpdate(dc as Graphics.Dc) as Void {
@@ -66,8 +57,7 @@ class Division2WatchFaceView extends WatchUi.WatchFace {
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
         dc.clear();
 
-        var hour = System.getClockTime().hour;
-        var idx = getThemeIndex(hour);
+        var idx = getThemeIndex(_themes.size());
 
         // Switch theme if needed — load/unload resources
         if (idx != _currentThemeIdx) {

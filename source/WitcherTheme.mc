@@ -2,7 +2,7 @@ import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.Math;
 
-//! The Witcher theme - active 08:00-12:00 (Morning).
+//! The Witcher theme.
 //! Steel and silver on black, a Wolf School medallion with glowing cat eyes.
 class WitcherTheme extends ThemeBase {
 

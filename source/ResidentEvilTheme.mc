@@ -5,7 +5,7 @@ import Toybox.Math;
 import Toybox.System;
 import Toybox.WatchUi;
 
-//! Umbrella theme (class keeps the name ResidentEvilTheme) - active 19:00-22:00 (Evening).
+//! Umbrella theme (class keeps the name ResidentEvilTheme).
 //! Variant B of the approved W4 Outbreak x W5 Save Room mix, amber on warm black:
 //!  - the Umbrella logo is the bezel and the step meter: 8 segments, one per 12.5% of the step goal;
 //!    reached segments are lit, the rest sit halfway between the lit colour and the old dark level;
