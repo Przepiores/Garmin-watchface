@@ -13,38 +13,46 @@ class Division2WatchFaceView extends WatchUi.WatchFace {
     private var _isAwake as Boolean = true;
 
     // ── Theme indices — must match _themes array order (see onLayout()) ──
-    private const THEME_DUNE       = 0;
-    private const THEME_DIVISION   = 1;
-    private const THEME_BLACKFLAG  = 2;
-    private const THEME_WARHAMMER  = 3;
+    private const THEME_WITCHER      = 0;
+    private const THEME_DIVISION     = 1;
+    private const THEME_DAWNWALKER   = 2;
+    private const THEME_RESIDENTEVIL = 3;
+    private const THEME_WARHAMMER    = 4;
 
     public function initialize() {
         WatchFace.initialize();
     }
 
     public function onLayout(dc as Graphics.Dc) as Void {
-        // Create all 4 themes
-        var dune      = new DuneTheme();
-        var division  = new DivisionTheme();
-        var blackFlag = new BlackFlagTheme();
-        var warhammer = new WarhammerTheme();
+        // New theme instances have no buffer yet; -1 forces loadResources() on the next onUpdate()
+        _currentThemeIdx = -1;
+
+        // Create all 5 themes
+        var witcher      = new WitcherTheme();
+        var division     = new DivisionTheme();
+        var dawnwalker   = new DawnwalkerTheme();
+        var residentEvil = new ResidentEvilTheme();
+        var warhammer    = new WarhammerTheme();
 
         // Initialize geometry for each
-        dune.init(dc);
+        witcher.init(dc);
         division.init(dc);
-        blackFlag.init(dc);
+        dawnwalker.init(dc);
+        residentEvil.init(dc);
         warhammer.init(dc);
 
-        _themes = [dune, division, blackFlag, warhammer];
+        _themes = [witcher, division, dawnwalker, residentEvil, warhammer];
     }
 
     //! Determine which theme to use based on current hour
-    //! THEME_DUNE(8-12), THEME_DIVISION(12-17), THEME_BLACKFLAG(17-22), THEME_WARHAMMER(22-8)
+    //! THEME_WITCHER(8-12), THEME_DIVISION(12-17), THEME_DAWNWALKER(17-19),
+    //! THEME_RESIDENTEVIL(19-22), THEME_WARHAMMER(22-8)
     private function getThemeIndex(hour as Number) as Number {
-        if (hour >= 8  && hour < 12) { return THEME_DUNE; }       // morning
-        if (hour >= 12 && hour < 17) { return THEME_DIVISION; }   // day
-        if (hour >= 17 && hour < 22) { return THEME_BLACKFLAG; }  // evening
-        return THEME_WARHAMMER;                                   // night
+        if (hour >= 8  && hour < 12) { return THEME_WITCHER; }       // morning
+        if (hour >= 12 && hour < 17) { return THEME_DIVISION; }      // day
+        if (hour >= 17 && hour < 19) { return THEME_DAWNWALKER; }    // dusk
+        if (hour >= 19 && hour < 22) { return THEME_RESIDENTEVIL; }  // evening
+        return THEME_WARHAMMER;                                      // night
     }
 
     public function onUpdate(dc as Graphics.Dc) as Void {
