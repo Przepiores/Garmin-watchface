@@ -1,3 +1,5 @@
 <resources>
     <jsonData id="WarhammerLogo" filename="warhammer_logo.json"/>
+    <jsonData id="AssassinLogo" filename="assassin_logo.json"/>
+    <jsonData id="HadesBg" filename="hades_bg.json"/>
 </resources>
