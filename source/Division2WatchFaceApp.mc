@@ -23,10 +23,14 @@ class Division2WatchFaceApp extends Application.AppBase {
     }
 
     //! Return the initial view and delegate for the watch face
-    //! @return Array containing the initial view
+    //! @return Array containing the initial view and, on devices that support it, the delegate for touch and hold
     function getInitialView() as [WatchUi.Views] or [WatchUi.Views, WatchUi.InputDelegates] {
-        _view = new Division2WatchFaceView();
-        return [_view] as [WatchUi.Views];
+        var view = new Division2WatchFaceView();
+        _view = view;
+        if (WatchUi has :WatchFaceDelegate) {
+            return [view, new Division2WatchFaceDelegate(view)] as [WatchUi.Views, WatchUi.InputDelegates];
+        }
+        return [view] as [WatchUi.Views];
     }
 
     //! Called when application settings are changed in Garmin Connect Mobile
