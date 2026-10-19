@@ -430,7 +430,7 @@ class DawnwalkerTheme extends ThemeBase {
     }
 
     // ================================================================
-    //  TEXT HELPERS (same as in ResidentEvilTheme, the Umbrella theme)
+    //  TEXT HELPERS (same as in CyberpunkTheme)
     // ================================================================
 
     private function pick(font, fallback) {

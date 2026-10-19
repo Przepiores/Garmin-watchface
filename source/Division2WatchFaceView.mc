@@ -12,7 +12,7 @@ import Toybox.Timer;
 class Division2WatchFaceView extends WatchUi.WatchFace {
 
     // Names shown by the toast, in _themes order
-    private const THEME_NAMES = ["HADES", "DIVISION", "DAWNWALKER", "RESIDENT EVIL", "WARHAMMER", "ASSASSIN"];
+    private const THEME_NAMES = ["HADES", "DIVISION", "DAWNWALKER", "CYBERPUNK", "WARHAMMER", "ASSASSIN", "DUNE"];
     private const PIN_KEY      = "ThemePin";
     private const TOAST_MS     = 2500;   // how long the theme name stays on screen after a switch
     private const PRESS_GAP_MS = 1200;   // a hold can be reported more than once; presses closer than this are ignored
@@ -74,24 +74,26 @@ class Division2WatchFaceView extends WatchUi.WatchFace {
         // New theme instances have no buffer yet; -1 forces loadResources() on the next onUpdate()
         _currentThemeIdx = -1;
 
-        // Create all 6 themes
-        var hades        = new HadesTheme();
-        var division     = new DivisionTheme();
-        var dawnwalker   = new DawnwalkerTheme();
-        var residentEvil = new ResidentEvilTheme();
-        var warhammer    = new WarhammerTheme();
-        var assassin     = new AssassinTheme();
+        // Create all 7 themes
+        var hades      = new HadesTheme();
+        var division   = new DivisionTheme();
+        var dawnwalker = new DawnwalkerTheme();
+        var cyberpunk  = new CyberpunkTheme();
+        var warhammer  = new WarhammerTheme();
+        var assassin   = new AssassinTheme();
+        var dune       = new DuneTheme();
 
         // Initialize geometry for each
         hades.init(dc);
         division.init(dc);
         dawnwalker.init(dc);
-        residentEvil.init(dc);
+        cyberpunk.init(dc);
         warhammer.init(dc);
         assassin.init(dc);
+        dune.init(dc);
 
         // Order = rotation order: one theme per day (see getThemeIndex())
-        _themes = [hades, division, dawnwalker, residentEvil, warhammer, assassin];
+        _themes = [hades, division, dawnwalker, cyberpunk, warhammer, assassin, dune];
     }
 
     //! The pinned theme if there is one, otherwise one theme per local calendar day: day number since 1970 (local time, DST included)
