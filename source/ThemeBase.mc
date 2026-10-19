@@ -143,7 +143,7 @@ class ThemeBase {
         var timeStr = Lang.format("$1$:$2$",
             [time.hour.format("%02d"), time.min.format("%02d")]);
         dc.setColor(_colorTime, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(_centerX, (275 * _scale).toNumber(), getTimeFont(), timeStr,
+        dc.drawText(_centerX, (263 * _scale).toNumber(), getTimeFont(), timeStr,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
@@ -185,8 +185,8 @@ class ThemeBase {
     }
 
     public function drawBatteryRow(dc as Graphics.Dc) as Void {
-        var dateY = 330 * _scale;
-        var batY  = 365 * _scale;
+        var dateY = 319 * _scale;
+        var batY  = 356 * _scale;
 
         // Date
         var info = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);

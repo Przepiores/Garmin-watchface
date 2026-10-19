@@ -84,10 +84,10 @@ class ResidentEvilTheme extends ThemeBase {
         readSteps();
         _litCount = litSegments();
         _fTime   = makeFont(116);
-        _fTag    = makeFont(13);
+        _fTag    = makeFont(16);
         _fLabel  = makeFont(10);
         _fValue  = makeFont(15);
-        _fRibbon = makeFont(12);
+        _fRibbon = makeFont(15);
         ThemeBase.loadResources();
     }
 

@@ -66,9 +66,9 @@ class DawnwalkerTheme extends ThemeBase {
     private const FONT_EM_TO_SIZE = 1.35;  // Pridi: vector font size (line height) per em, measured on the simulator
 
     private var _fTime   = null;                                         // bitmap font (digits and colon) or the Pridi vector font, 66 px
-    private var _fTag    as Graphics.VectorFont or Null = null;          // 12 px
-    private var _fDate   as Graphics.VectorFont or Null = null;          // 15 px
-    private var _fRibbon as Graphics.VectorFont or Null = null;          // 11 px
+    private var _fTag    as Graphics.VectorFont or Null = null;          // 15 px
+    private var _fDate   as Graphics.VectorFont or Null = null;          // 19 px
+    private var _fRibbon as Graphics.VectorFont or Null = null;          // 14 px
 
     private var _steps   as Number = 0;
     private var _goal    as Number = 10000;
@@ -88,7 +88,7 @@ class DawnwalkerTheme extends ThemeBase {
     //! The arc text of the data fields uses Pridi instead of the default radial font.
     public function init(dc as Graphics.Dc) as Void {
         ThemeBase.init(dc);
-        var f = makeFont(14);
+        var f = makeFont(17);
         if (f != null) { _radialFont = f; }
     }
 
@@ -108,9 +108,9 @@ class DawnwalkerTheme extends ThemeBase {
             }
         }
         if (_fTime == null) { _fTime = makeFont(66); }
-        _fTag    = makeFont(12);
-        _fDate   = makeFont(15);
-        _fRibbon = makeFont(11);
+        _fTag    = makeFont(18);
+        _fDate   = makeFont(22);
+        _fRibbon = makeFont(17);
         ThemeBase.loadResources();
     }
 

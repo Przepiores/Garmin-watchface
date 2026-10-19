@@ -38,14 +38,14 @@ class DivisionTheme extends ThemeBase {
                 var h = dc.getFontHeight(Graphics.FONT_NUMBER_HOT);
                 _timeFont = Graphics.getVectorFont({
                     :face => ["RobotoCondensedBold", "Swiss721Regular", "RobotoRegular"],
-                    :size => (h * 1.1).toNumber()
+                    :size => (h * 0.6).toNumber()
                 });
             } catch (e) { _timeFont = null; }
             try {
                 var h2 = dc.getFontHeight(Graphics.FONT_XTINY);
                 _smallFont = Graphics.getVectorFont({
                     :face => ["RobotoCondensedBold", "Swiss721Regular", "RobotoRegular"],
-                    :size => (h2 * 1.1).toNumber()
+                    :size => (h2 * 1.25).toNumber()
                 });
             } catch (e) { _smallFont = null; }
         }

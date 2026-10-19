@@ -47,7 +47,6 @@ class WarhammerTheme extends ThemeBase {
     private const IN_HW           = 2.7;
     private const INTERIOR_R      = 186;
     private const SCAN_R          = 160;
-    private const CONTACT_R       = 118;
     private const LOGO_Y          = 99;    // centre of the chapter badge
     private const LOGO_WIDTH      = 84;
     private const TAG_BASELINE    = 150;
@@ -90,9 +89,9 @@ class WarhammerTheme extends ThemeBase {
     public function loadResources() as Void {
         refreshState();
         _fTime = makeFont(112);
-        _fVal  = makeFont(16);
-        _fLab  = makeFont(10);
-        _fTag  = makeFont(12);
+        _fVal  = makeFont(20);
+        _fLab  = makeFont(13);
+        _fTag  = makeFont(15);
         ThemeBase.loadResources();
     }
 
@@ -291,15 +290,15 @@ class WarhammerTheme extends ThemeBase {
     //  DYNAMIC LAYER - contacts, tag, time, BLOOD TIDE
     // ================================================================
 
-    //! The four fields are contacts on the scanner at 128, 52, 232 and 308 degrees: a blip with the value beside it.
+    //! The four fields are contacts on the scanner at 132, 36, 228 and 304 degrees, each at its own radius so the layout is not symmetric: a blip with the value beside it.
     public function drawDataFields(dc as Graphics.Dc) as Void {
-        drawContact(dc, _fieldTopLeft, 128.0, true);
-        drawContact(dc, _fieldTopRight, 52.0, false);
-        drawContact(dc, _fieldBottomLeft, 232.0, true);
-        drawContact(dc, _fieldBottomRight, 308.0, false);
+        drawContact(dc, _fieldTopLeft, 132.0, 122, true);
+        drawContact(dc, _fieldTopRight, 36.0, 112, false);
+        drawContact(dc, _fieldBottomLeft, 228.0, 124, true);
+        drawContact(dc, _fieldBottomRight, 304.0, 126, false);
     }
 
-    private function drawContact(dc as Graphics.Dc, type as Number, angle as Float, left as Boolean) as Void {
+    private function drawContact(dc as Graphics.Dc, type as Number, angle as Float, radius as Number, left as Boolean) as Void {
         if (type == FIELD_OFF) { return; }
         var data = getFieldDataStr(type);
         var value = data[1] as String;
@@ -308,8 +307,8 @@ class WarhammerTheme extends ThemeBase {
 
         var s = _scale;
         var a = angle * Math.PI / 180.0;
-        var x = _centerX + CONTACT_R * s * Math.cos(a);
-        var y = _centerY - CONTACT_R * s * Math.sin(a);
+        var x = _centerX + radius * s * Math.cos(a);
+        var y = _centerY - radius * s * Math.sin(a);
         var dir = left ? -1 : 1;
 
         dc.setColor(COLOR_GREEN, Graphics.COLOR_TRANSPARENT);
@@ -323,8 +322,8 @@ class WarhammerTheme extends ThemeBase {
         var just = left ? Graphics.TEXT_JUSTIFY_RIGHT : Graphics.TEXT_JUSTIFY_LEFT;
         var valueBase = y + 5 * s;
         if (label.length() > 0) {
-            drawBaselineText(dc, tx, y - 3 * s, pick(_fLab, Graphics.FONT_XTINY), label, just, 1);
-            valueBase = y + 13 * s;
+            drawBaselineText(dc, tx, y - 5 * s, pick(_fLab, Graphics.FONT_XTINY), label, just, 1);
+            valueBase = y + 15 * s;
         }
         dc.setColor(COLOR_CHALK, Graphics.COLOR_TRANSPARENT);
         drawBaselineText(dc, tx, valueBase, pick(_fVal, Graphics.FONT_XTINY), value, just, 0);
