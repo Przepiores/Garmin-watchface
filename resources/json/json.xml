@@ -2,4 +2,6 @@
     <jsonData id="WarhammerLogo" filename="warhammer_logo.json"/>
     <jsonData id="AssassinLogo" filename="assassin_logo.json"/>
     <jsonData id="HadesBg" filename="hades_bg.json"/>
+    <jsonData id="DuneBgA" filename="dune_bg_a.json"/>
+    <jsonData id="DuneBgB" filename="dune_bg_b.json"/>
 </resources>
